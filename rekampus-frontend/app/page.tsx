@@ -34,7 +34,6 @@ export default function Home() {
     
     setIsLoading(true);
     try {
-      // Menggunakan rpc.Server sesuai versi SDK terbaru
       const server = new rpc.Server(RPC_URL);
       const account = await server.getAccount(walletAddress);
       const contract = new Contract(CONTRACT_ID);
@@ -48,8 +47,6 @@ export default function Home() {
       .build();
 
       const preparedTx = await server.prepareTransaction(tx);
-
-      // Menggunakan networkPassphrase sesuai aturan Freighter API terbaru
       const signedXdr = await signTransaction(preparedTx.toXDR(), { networkPassphrase: Networks.TESTNET });
       
       if (signedXdr) {
@@ -69,56 +66,69 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 text-gray-900 p-8 font-sans">
-      <div className="max-w-2xl mx-auto space-y-8">
+    // Background utama yang menawan dengan soft mesh gradient
+    <main className="relative min-h-screen bg-slate-50 flex items-center justify-center p-8 font-sans overflow-hidden">
+      
+      {/* Abstract Background Blobs untuk nge-highlight efek Glassmorphism */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse"></div>
+      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse delay-1000"></div>
+      <div className="absolute bottom-1/4 left-1/2 w-96 h-96 bg-cyan-300 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse delay-2000"></div>
+
+      {/* Glassmorphism Container Utama */}
+      <div className="relative z-10 w-full max-w-2xl backdrop-blur-xl bg-white/40 border border-white/60 shadow-2xl rounded-3xl p-8 space-y-8">
         
-        <header className="flex justify-between items-center border-b border-gray-200 pb-4">
-          <h1 className="text-2xl font-semibold tracking-tight">ReKampus Escrow</h1>
+        {/* Header Section */}
+        <header className="flex justify-between items-center border-b border-white/30 pb-5">
+          <h1 className="text-3xl font-bold tracking-tight text-slate-800 drop-shadow-sm">ReKampus Escrow</h1>
           <button
             onClick={connectWallet}
-            className="px-4 py-2 bg-black text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors"
+            className="px-5 py-2.5 bg-slate-800/90 hover:bg-slate-900 text-white text-sm font-medium rounded-xl transition-all shadow-md hover:shadow-lg backdrop-blur-md"
           >
             {walletAddress ? `Connected: ${formatAddress(walletAddress)}` : 'Connect Freighter'}
           </button>
         </header>
 
-        <section className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-          <h2 className="text-lg font-medium mb-4">Active Transaction</h2>
+        {/* Escrow Detail Panel (Inner Glass Card) */}
+        <section className="backdrop-blur-md bg-white/50 border border-white/50 rounded-2xl p-6 shadow-inner">
+          <h2 className="text-xl font-semibold mb-5 text-slate-800">Active Transaction</h2>
           <div className="space-y-4 text-sm">
-            <div className="flex justify-between border-b border-gray-100 pb-2">
-              <span className="text-gray-500">Status</span>
-              <span className="font-medium text-blue-600">Initialized</span>
+            <div className="flex justify-between border-b border-white/40 pb-3">
+              <span className="text-slate-600 font-medium">Status</span>
+              <span className="font-bold text-indigo-600 tracking-wide">Initialized</span>
             </div>
-            <div className="flex justify-between border-b border-gray-100 pb-2">
-              <span className="text-gray-500">Amount</span>
-              <span className="font-medium">500 XLM</span>
+            <div className="flex justify-between border-b border-white/40 pb-3">
+              <span className="text-slate-600 font-medium">Amount</span>
+              <span className="font-bold text-slate-800">500 XLM</span>
             </div>
-            <div className="flex justify-between border-b border-gray-100 pb-2">
-              <span className="text-gray-500">Seller Address</span>
-              <span className="font-mono text-xs text-gray-600">GBRA6BIBSH7C6SVQ7X7ONJINMLHJOTUP65EJ3QXSBVEUUNRMF3L3Z6A4</span>
+            <div className="flex justify-between border-white/40 pb-1">
+              <span className="text-slate-600 font-medium">Seller Address</span>
+              <span className="font-mono text-xs font-semibold text-slate-700 bg-white/40 px-2 py-1 rounded-md">
+                GBRA...Z6A4
+              </span>
             </div>
           </div>
         </section>
 
+        {/* Action Buttons */}
         <section className="grid grid-cols-3 gap-4">
           <button 
             onClick={() => handleSmartContractAction('deposit')}
             disabled={isLoading}
-            className="py-2.5 border border-gray-300 bg-white rounded-md text-sm font-medium hover:bg-gray-50 transition-colors disabled:opacity-50"
+            className="py-3 backdrop-blur-sm bg-white/60 border border-white/70 rounded-xl text-sm font-bold text-slate-700 hover:bg-white/80 transition-all shadow-sm hover:shadow-md disabled:opacity-50"
           >
             {isLoading ? 'Processing...' : 'Deposit'}
           </button>
           <button 
             onClick={() => handleSmartContractAction('confirm_received')}
             disabled={isLoading}
-            className="py-2.5 bg-black text-white rounded-md text-sm font-medium hover:bg-gray-800 transition-colors disabled:opacity-50"
+            className="py-3 bg-indigo-600/90 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold transition-all shadow-md hover:shadow-lg disabled:opacity-50 backdrop-blur-md"
           >
             Confirm Received
           </button>
           <button 
             onClick={() => handleSmartContractAction('cancel')}
             disabled={isLoading}
-            className="py-2.5 border border-red-200 bg-white text-red-600 rounded-md text-sm font-medium hover:bg-red-50 transition-colors disabled:opacity-50"
+            className="py-3 backdrop-blur-sm bg-red-50/60 border border-red-200/60 text-red-600 rounded-xl text-sm font-bold hover:bg-red-100/80 transition-all shadow-sm hover:shadow-md disabled:opacity-50"
           >
             Cancel
           </button>
