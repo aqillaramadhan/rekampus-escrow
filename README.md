@@ -2,6 +2,8 @@
 
 A decentralized escrow smart contract solution built on the Stellar blockchain using the Soroban SDK. This project provides a secure, trustless, and transparent transaction system tailored for peer-to-peer campus marketplaces.
 
+> **🚀 Live Demo:** [https://rekampus-escrow.vercel.app](https://rekampus-escrow.vercel.app)
+
 ---
 
 ## 📌 Project Description
