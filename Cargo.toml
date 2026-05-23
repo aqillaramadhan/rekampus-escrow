@@ -1,0 +1,23 @@
+[package]
+name    = "rekampus-escrow"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "rekampus_escrow"
+crate-type = ["cdylib"]
+
+[dependencies]
+soroban-sdk = "21"        # pin to the latest stable Soroban SDK
+
+[dev-dependencies]
+soroban-sdk = { version = "21", features = ["testutils"] }
+
+[profile.release]
+opt-level     = "z"       # optimize for size — important for WASM contracts
+overflow-checks = true
+debug         = false
+strip         = "symbols"
+lto           = true
+codegen-units = 1
+panic         = "abort"
