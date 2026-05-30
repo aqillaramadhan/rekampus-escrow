@@ -39,7 +39,7 @@ export default function Home() {
       const contract = new Contract(CONTRACT_ID);
 
       const tx = new TransactionBuilder(account, {
-        fee: '100',
+        fee: '1000',
         networkPassphrase: Networks.PUBLIC,
       })
       .addOperation(contract.call(functionName))
@@ -47,10 +47,20 @@ export default function Home() {
       .build();
 
       const preparedTx = await server.prepareTransaction(tx);
-      const signedXdr = await signTransaction(preparedTx.toXDR(), { networkPassphrase: Networks.PUBLIC });
-      
-      if (signedXdr) {
-        alert(`🔥 Transaksi ${functionName} berhasil di-sign oleh Freighter! Demo Hackathon Aman!`);
+      const signed = await signTransaction(preparedTx.toXDR(), {
+        networkPassphrase: Networks.PUBLIC,
+      });
+      if (signed?.signedTxXdr) {
+        const txToSubmit = TransactionBuilder.fromXDR(
+          signed.signedTxXdr,
+          Networks.PUBLIC
+        );
+        const result = await server.sendTransaction(txToSubmit);
+        console.log("TX RESULT:", result);
+        console.log("Prepared TX:", preparedTx.toXDR());
+        console.log("Signed TX:", signed.signedTxXdr);
+        console.log("TX HASH:", result.hash);
+        alert(`✅ Transaksi ${functionName} berhasil dikirim ke MAINNET!`);
       }
     } catch (error) {
       console.error(`Action ${functionName} gagal:`, error);
