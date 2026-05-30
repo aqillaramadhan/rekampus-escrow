@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { isConnected, requestAccess, signTransaction } from '@stellar/freighter-api';
 import { rpc, TransactionBuilder, Networks, Contract, TimeoutInfinite } from '@stellar/stellar-sdk';
 
-const CONTRACT_ID = 'CBUZHV5NKXY2MMWY5OWTWWDXVK3JOWR5SKZIAYSY52P3DMVAA4PMJLRD';
-const RPC_URL = 'https://soroban-testnet.stellar.org';
+const CONTRACT_ID = 'CCJYTXUBBJBCEI5KI7MRRIH7UMQIWSUPEZCG4VZETI54H6FY67TQ7D56';
+const RPC_URL = 'https://soroban-rpc.stellar.org';
 
 export default function Home() {
   const [walletAddress, setWalletAddress] = useState('');
@@ -40,14 +40,14 @@ export default function Home() {
 
       const tx = new TransactionBuilder(account, {
         fee: '100',
-        networkPassphrase: Networks.TESTNET,
+        networkPassphrase: Networks.PUBLIC,
       })
       .addOperation(contract.call(functionName))
       .setTimeout(TimeoutInfinite)
       .build();
 
       const preparedTx = await server.prepareTransaction(tx);
-      const signedXdr = await signTransaction(preparedTx.toXDR(), { networkPassphrase: Networks.TESTNET });
+      const signedXdr = await signTransaction(preparedTx.toXDR(), { networkPassphrase: Networks.PUBLIC });
       
       if (signedXdr) {
         alert(`🔥 Transaksi ${functionName} berhasil di-sign oleh Freighter! Demo Hackathon Aman!`);

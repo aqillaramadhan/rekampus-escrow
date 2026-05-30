@@ -8,61 +8,93 @@ A decentralized escrow smart contract solution built on the Stellar blockchain u
 
 ## 📌 Project Description
 
-**ReKampus Escrow DApp** solves the critical challenge of trust in peer-to-peer student transactions (such as buying used books, electronics, or campus services). Instead of relying on risky manual transfers or centralized third parties, funds are securely locked in an on-chain smart contract. The contract acts as an immutable intermediary, automatically releasing funds to the seller only after the buyer confirms successful receipt of the goods, or facilitating an instant refund if the transaction is cancelled.
+**ReKampus Escrow DApp** solves the critical challenge of trust in peer-to-peer student transactions (such as buying used books, electronics, or campus services). Instead of relying on risky manual transfers or centralized third parties, funds are securely locked in an on-chain smart contract.
+
+The contract acts as an immutable intermediary, automatically releasing funds to the seller only after the buyer confirms successful receipt of the goods, or facilitating an instant refund if the transaction is cancelled.
 
 ---
 
 ## 🎯 Project Vision
 
 Our vision is to revolutionize digital campus commerce by establishing a trustless financial primitive powered by smart contracts.
-- **Decentralization**: Removing centralized marketplace fees and arbitrary intermediary controls.
-- **Transaction Fairness**: Ensuring both buyers and sellers are fully protected throughout the trade lifecycle.
-- **Fraud Reduction**: Eliminating common student peer-to-peer scams through robust on-chain fund locking.
-- **Clean & Accessible Web3 UX**: Leveraging modern design languages like premium Glassmorphism to bridge the gap between complex blockchain logic and everyday student usability.
+
+* **Decentralization**: Removing centralized marketplace fees and arbitrary intermediary controls
+* **Transaction Fairness**: Ensuring both buyers and sellers are fully protected throughout the trade lifecycle
+* **Fraud Reduction**: Eliminating common student peer-to-peer scams through robust on-chain fund locking
+* **Clean & Accessible Web3 UX**: Bridging complex blockchain logic with intuitive UI/UX
 
 ---
 
 ## ⚙️ Key Features
 
 ### 🧾 Create Escrow
-The buyer initializes a contract instance on-chain, binding the specific transaction details: buyer address, seller address, token type, and target amount.
+
+The buyer initializes a contract instance on-chain, defining:
+
+* Buyer address
+* Seller address
+* Token type
+* Transaction amount
 
 ### 💰 Deposit Funds
-The buyer transfers the required tokens into the smart contract's custody, shifting the escrow state to `Funded`.
+
+The buyer deposits funds into the smart contract, transitioning the escrow state to `Funded`.
 
 ### ✅ Confirm Transaction
-Upon verifying the physical or digital asset delivery, the buyer triggers the release function, transferring the locked funds directly to the seller's wallet.
+
+Once the buyer receives the item/service, they confirm the transaction, triggering the release of funds to the seller.
 
 ### ❌ Cancel Escrow
-Allows the buyer to abort the transaction if conditions are unmet, securely reversing the locked funds back to the buyer's balance.
+
+If conditions are not met, the buyer can cancel the escrow and retrieve their funds securely.
 
 ---
 
 ## 🧠 Smart Contract Details
 
-- **Network**: Stellar Soroban Testnet
-- **Contract ID**: `CBUZHV5NKXY2MMWY5OWTWWDXVK3JOWR5SKZIAYSY52P3DMVAA4PMJLRD`
-- **On-Chain Transaction Hash**: [9a035d9451b7052342dc573f86cbd0357cf3c6296db1eb1d](https://stellar.expert/explorer/testnet/tx/9a035d9451b7052342dc573f86cbd0357cf3c6296db1eb1d)
-- **Verified Contract Instance**: [Stellar Laboratory View](https://lab.stellar.org/r/testnet/contract/CBUZHV5NKXY2MMWY5OWTWWDXVK3JOWR5SKZIAYSY52P3DMVAA4PMJLRD)
+* **Network**: Stellar Mainnet
+
+* **Contract ID**:
+
+  ```
+  CCJYTXUBBJBCEI5KI7MRRIH7UMQIWSUPEZCG4VZETI54H6FY67TQ7D56
+  ```
+
+* **Transaction (Deployment Proof)**:
+  https://stellar.expert/explorer/public/tx/79f7e866cd264eb7c632d97a5f6752f53ba10656665899da0ba3df599f80be31
+
+* **Contract Explorer (Stellar Lab)**:
+  https://lab.stellar.org/r/mainnet/contract/CCJYTXUBBJBCEI5KI7MRRIH7UMQIWSUPEZCG4VZETI54H6FY67TQ7D56
 
 ---
 
 ## 🚀 Development Status
 
-- ✅ **Core Logic**: Fully implemented state-machine lifecycle (Initialized → Funded → Released / Cancelled).
-- ✅ **Security**: Robust access control verification utilizing Soroban's `require_auth()` primitives.
-- ✅ **Testing**: Comprehensive local unit tests successfully passed (`cargo test`).
-- ✅ **Deployment**: Successfully compiled to WASM and deployed live onto the Stellar Testnet.
-- ✅ **Frontend UI**: Built using Next.js 14, integrated with `@stellar/freighter-api` and styled with an advanced, clean Glassmorphism aesthetic.
+* ✅ **Core Logic**: Fully implemented state-machine lifecycle (Initialized → Funded → Released / Cancelled)
+* ✅ **Security**: Access control enforced using Soroban `require_auth()`
+* ✅ **Testing**: Unit tests passed (`cargo test`)
+* ✅ **Deployment**: Successfully deployed to **Stellar Mainnet**
+* ✅ **Frontend UI**: Built with Next.js 14 + Freighter Wallet integration
 
 ---
 
 ## 🛠 Tech Stack
 
-- **Smart Contract Layer**: Rust, Soroban SDK
-- **Frontend Framework**: Next.js 14 (App Router), TypeScript
-- **Styling**: Tailwind CSS (Backdrop Blur Filters)
-- **Web3 Integration**: `@stellar/freighter-api`, `@stellar/stellar-sdk`
+* **Smart Contract**: Rust, Soroban SDK
+* **Frontend**: Next.js 14 (App Router), TypeScript
+* **Styling**: Tailwind CSS (Glassmorphism UI)
+* **Blockchain Integration**:
+
+  * `@stellar/freighter-api`
+  * `@stellar/stellar-sdk`
+
+---
+
+## ⚠️ Important Notes
+
+* This application runs on **Stellar Mainnet**
+* All transactions involve **real XLM (not testnet tokens)**
+* Ensure your Freighter wallet is connected to **PUBLIC network** before interacting
 
 ---
 
@@ -70,3 +102,5 @@ Allows the buyer to abort the transaction if conditions are unmet, securely reve
 
 **Muhammad Aqilla Ramadhan**
 IPB University — Artificial Intelligence Student
+
+---

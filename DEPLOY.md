@@ -1,3 +1,9 @@
+> ⚠️ **Note:**
+> This guide uses **Stellar Testnet** for development and reproducibility.
+> The production contract is already deployed on **Stellar Mainnet** (see README.md for details).
+>
+> Testnet is used here to allow anyone to run and test the contract safely without requiring real XLM.
+
 # ReKampus Escrow — Deploy & Test Guide
 
 ## Prerequisites
