@@ -1,52 +1,50 @@
 # 🔐 ReKampus Escrow DApp
 
-A decentralized escrow smart contract solution built on the Stellar blockchain using the Soroban SDK. This project provides a secure, trustless, and transparent transaction system tailored for peer-to-peer campus marketplaces.
+A decentralized escrow application built on the **Stellar Soroban smart contract platform**, enabling secure, trustless peer-to-peer transactions for campus communities.
 
-> **🚀 Live Demo:** [https://rekampus-escrow.vercel.app](https://rekampus-escrow.vercel.app)
-
----
-
-## 📌 Project Description
-
-**ReKampus Escrow DApp** solves the critical challenge of trust in peer-to-peer student transactions (such as buying used books, electronics, or campus services). Instead of relying on risky manual transfers or centralized third parties, funds are securely locked in an on-chain smart contract.
-
-The contract acts as an immutable intermediary, automatically releasing funds to the seller only after the buyer confirms successful receipt of the goods, or facilitating an instant refund if the transaction is cancelled.
+> 🚀 **Live Demo:** https://rekampus-escrow.vercel.app
 
 ---
 
-## 🎯 Project Vision
+## 📌 Overview
 
-Our vision is to revolutionize digital campus commerce by establishing a trustless financial primitive powered by smart contracts.
+ReKampus Escrow solves the trust problem in student-to-student transactions (e.g., buying used books, electronics, or services).
 
-* **Decentralization**: Removing centralized marketplace fees and arbitrary intermediary controls
-* **Transaction Fairness**: Ensuring both buyers and sellers are fully protected throughout the trade lifecycle
-* **Fraud Reduction**: Eliminating common student peer-to-peer scams through robust on-chain fund locking
-* **Clean & Accessible Web3 UX**: Bridging complex blockchain logic with intuitive UI/UX
+Instead of relying on manual transfers or centralized intermediaries, funds are securely held in an **on-chain escrow smart contract**, ensuring:
+
+* Funds are only released when the buyer confirms receipt
+* Refunds are guaranteed if the transaction is canceled
+* No third-party intervention is required
 
 ---
 
-## ⚙️ Key Features
+## 🎯 Key Features
 
-### 🧾 Create Escrow
+* 🔗 **Wallet Integration**
+  Connect using Freighter Wallet (Stellar)
 
-The buyer initializes a contract instance on-chain, defining:
+* 💰 **Deposit Funds**
+  Buyer deposits XLM into the escrow smart contract
 
-* Buyer address
-* Seller address
-* Token type
-* Transaction amount
+* ✅ **Confirm Transaction**
+  Buyer confirms receipt → funds released to seller
 
-### 💰 Deposit Funds
+* ❌ **Cancel Escrow**
+  Buyer cancels → funds refunded securely
 
-The buyer deposits funds into the smart contract, transitioning the escrow state to `Funded`.
+* ⚡ **On-Chain Execution**
+  All actions executed directly on Stellar Mainnet
 
-### ✅ Confirm Transaction
+---
 
-Once the buyer receives the item/service, they confirm the transaction, triggering the release of funds to the seller.
+## 🔗 Frontend Interaction
 
-### ❌ Cancel Escrow
+Users can directly interact with the deployed smart contract via the web interface:
 
-If conditions are not met, the buyer can cancel the escrow and retrieve their funds securely.
+* Connect Freighter wallet
+* Trigger smart contract functions (`deposit`, `confirm_received`, `cancel`)
+* Sign transactions client-side
+* Submit transactions to Stellar Mainnet
 
 ---
 
@@ -56,45 +54,45 @@ If conditions are not met, the buyer can cancel the escrow and retrieve their fu
 
 * **Contract ID**:
 
-  ```
-  CCJYTXUBBJBCEI5KI7MRRIH7UMQIWSUPEZCG4VZETI54H6FY67TQ7D56
-  ```
+```
+CCJYTXUBBJBCEI5KI7MRRIH7UMQIWSUPEZCG4VZETI54H6FY67TQ7D56
+```
 
-* **Transaction (Deployment Proof)**:
+* **Deployment Transaction**:
   https://stellar.expert/explorer/public/tx/79f7e866cd264eb7c632d97a5f6752f53ba10656665899da0ba3df599f80be31
 
-* **Contract Explorer (Stellar Lab)**:
+* **Contract Explorer**:
   https://lab.stellar.org/r/mainnet/contract/CCJYTXUBBJBCEI5KI7MRRIH7UMQIWSUPEZCG4VZETI54H6FY67TQ7D56
+
+---
+
+## ⚙️ Tech Stack
+
+* **Smart Contract**: Rust + Soroban SDK
+* **Frontend**: Next.js 14 (App Router), TypeScript
+* **Styling**: Tailwind CSS
+* **Blockchain Integration**:
+
+  * @stellar/freighter-api
+  * @stellar/stellar-sdk
 
 ---
 
 ## 🚀 Development Status
 
-* ✅ **Core Logic**: Fully implemented state-machine lifecycle (Initialized → Funded → Released / Cancelled)
-* ✅ **Security**: Access control enforced using Soroban `require_auth()`
-* ✅ **Testing**: Unit tests passed (`cargo test`)
-* ✅ **Deployment**: Successfully deployed to **Stellar Mainnet**
-* ✅ **Frontend UI**: Built with Next.js 14 + Freighter Wallet integration
-
----
-
-## 🛠 Tech Stack
-
-* **Smart Contract**: Rust, Soroban SDK
-* **Frontend**: Next.js 14 (App Router), TypeScript
-* **Styling**: Tailwind CSS (Glassmorphism UI)
-* **Blockchain Integration**:
-
-  * `@stellar/freighter-api`
-  * `@stellar/stellar-sdk`
+* ✅ Smart contract deployed to **Mainnet**
+* ✅ Core escrow lifecycle implemented (Initialized → Funded → Released / Cancelled)
+* ✅ Freighter wallet integration working
+* ✅ Transactions successfully submitted on-chain
+* ✅ Functional frontend UI
 
 ---
 
 ## ⚠️ Important Notes
 
-* This application runs on **Stellar Mainnet**
-* All transactions involve **real XLM (not testnet tokens)**
-* Ensure your Freighter wallet is connected to **PUBLIC network** before interacting
+* This app runs on **Stellar Mainnet**
+* Transactions use **real XLM (not testnet)**
+* Make sure Freighter is set to **PUBLIC network**
 
 ---
 
